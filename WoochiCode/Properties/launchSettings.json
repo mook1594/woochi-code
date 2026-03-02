@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WoochiCode": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
