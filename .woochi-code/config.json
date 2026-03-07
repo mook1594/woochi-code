@@ -1,0 +1,33 @@
+{
+  "llm": {
+    "baseUrl": "https://mook-model-coder.mooo.com",
+    "model": "local-model",
+    "maxTokens": 8192,
+    "temperature": 0.2,
+    "contextWindow": 524288,
+    "stream": true
+  },
+  "agent": {
+    "maxIterations": 20,
+    "confirmWrite": true,
+    "confirmBash": true,
+    "allowedPaths": [],
+    "contextStrategy": "truncate",
+    "summaryThreshold": 0.8
+  },
+  "skills": {
+    "globalDir": "C:\\Users\\wjdanr\\.config\\woochi-code\\skills",
+    "autoDetect": true
+  },
+  "session": {
+    "saveDir": "C:\\Users\\wjdanr\\.config\\woochi-code-cs\\sessions",
+    "autoSave": true,
+    "maxSessions": 50
+  },
+  "logging": {
+    "enabled": false,
+    "logDir": "",
+    "levels": [],
+    "maxFileSizeMB": 0
+  }
+}
