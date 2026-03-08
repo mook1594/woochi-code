@@ -12,21 +12,21 @@ namespace WoochiCode.zTest.Unit.Core.Vo
             string expected =
                 """
                 {
-                  "Llm": {
-                    "BaseUrl": "http://localhost:8080",
-                    "ModelName": "local-model",
-                    "MaxTokens": 4096,
-                    "Temperature": 0.2,
-                    "ContextWindow": 8192
+                  "llm": {
+                    "baseUrl": "http://localhost:8080",
+                    "modelName": "local-model",
+                    "maxTokens": 4096,
+                    "temperature": 0.2,
+                    "contextWindow": 8192
                   },
-                  "Agent": {
-                    "MaxIterations": 20,
-                    "ConfirmWrite": true,
-                    "ConfirmBash": true,
-                    "AllowedPaths": []
+                  "agent": {
+                    "maxIterations": 20,
+                    "confirmWrite": true,
+                    "confirmBash": true,
+                    "allowedPaths": []
                   },
-                  "Skills": {
-                    "AutoDetect": true
+                  "skills": {
+                    "autoDetect": true
                   }
                 }
                 """;
