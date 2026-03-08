@@ -36,8 +36,8 @@ public class ConsoleLogger : IConsoleLogger
     public void Warn(LogCategory category, string message, object? data = null)
         => Log(LogLevel.Warn, category, message, data);
 
-    public void Error(LogCategory category, string message, object? data = null)
-        => Log(LogLevel.Error, category, message, data);
+    public void Error(LogCategory category, string message, object? data = null, Exception? exception = null)
+        => Log(LogLevel.Error, category, message, data, exception);
 
     private void Write(LogEntry entry)
     {
@@ -102,7 +102,7 @@ public class ConsoleLogger : IConsoleLogger
             string dataMessage = entry.DataToString();
             sb.AppendLine();
             sb.Append(
-                (dataMessage.Length > _Options.MaxDataStringLength) ? dataMessage.Substring(0, _Options.MaxDataStringLength - 1) : entry.Data);
+                (dataMessage.Length > _Options.MaxDataStringLength) ? dataMessage.Substring(0, _Options.MaxDataStringLength - 1) : dataMessage);
         }
 
         if (_Options.IsIncludePrintException && entry.Exception is not null)

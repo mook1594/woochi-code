@@ -13,6 +13,7 @@ public class AppConstracts
     {
         WriteIndented = true,
         PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 }
 
