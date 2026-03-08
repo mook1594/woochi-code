@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="WoochiCode.Config/WoochiCode.Config.csproj" Id="8563a789-520a-444c-8f04-d90e9c3ba2e3" />
+  <Project Path="WoochiCode.Core/WoochiCode.Core.csproj" />
+  <Project Path="WoochiCode.zTest.Unit/WoochiCode.zTest.Unit.csproj" Id="69415901-c071-4d61-8721-ff54a8334073" />
   <Project Path="WoochiCode/WoochiCode.csproj" />
 </Solution>
