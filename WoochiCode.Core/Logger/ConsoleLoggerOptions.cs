@@ -10,17 +10,16 @@ public class ConsoleLoggerOptions
 
     public Dictionary<LogLevel, ConsoleColor> ForegroundLogLevelColors { get; } = new()
     {
-        [LogLevel.Info] = ConsoleColor.DarkGray,
-        [LogLevel.Warn] = ConsoleColor.Yellow,
+        [LogLevel.Warn] = ConsoleColor.DarkYellow,
         [LogLevel.Error] = ConsoleColor.Red,
     };
 
     public Dictionary<LogCategory, ConsoleColor> ForegroundLogCategoryColors { get; } = new()
     {
         [LogCategory.Message] = ConsoleColor.DarkGray,
-        [LogCategory.Tool] = ConsoleColor.Cyan,
-        [LogCategory.Hook] = ConsoleColor.Magenta,
-        [LogCategory.Skill] = ConsoleColor.DarkGreen,
-        [LogCategory.Agent] = ConsoleColor.Blue,
+        [LogCategory.Tool] = ConsoleColor.DarkCyan,
+        [LogCategory.Hook] = ConsoleColor.DarkMagenta,
+        [LogCategory.Skill] = ConsoleColor.Blue,
+        [LogCategory.Agent] = ConsoleColor.DarkGreen,
     };
 }

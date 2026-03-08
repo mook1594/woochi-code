@@ -1,5 +1,7 @@
 ﻿namespace WoochiCode.Core.Logger;
 
+using System.Text.Json;
+
 public record LogEntry
 (
     DateTimeOffset Timestamp,
@@ -12,7 +14,12 @@ public record LogEntry
 {
     public string DataToString()
     {
+        if (Data is null)
+            return "";
 
-        return "";
+        if (Data is string str)
+            return str;
+
+        return JsonSerializer.Serialize(Data, AppConstracts.JsonOpts);
     }
 }

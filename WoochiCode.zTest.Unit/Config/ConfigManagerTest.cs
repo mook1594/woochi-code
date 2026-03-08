@@ -30,9 +30,21 @@ public class ConfigManagerTest
     [Fact]
     public void SaveDefaultConfig()
     {
-        string expected = "";
+        string tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempDir);
 
-        string result = manager.SaveDefaultConfig();
-        Assert.Equal(expected, result);
+        try
+        {
+            var tempManager = new ConfigManager(tempDir);
+            string result = tempManager.SaveDefaultConfig();
+
+            Assert.NotNull(result);
+            Assert.NotEmpty(result);
+        }
+        finally
+        {
+            if (Directory.Exists(tempDir))
+                Directory.Delete(tempDir, true);
+        }
     }
 }

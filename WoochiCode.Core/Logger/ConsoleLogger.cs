@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Text.Json;
 
 namespace WoochiCode.Core.Logger;
 
@@ -15,8 +14,7 @@ public class ConsoleLogger : IConsoleLogger
         _Options = options ?? new();
     }
 
-
-    public void Log(LogLevel level, LogCategory category, string message, string? data = null, Exception? exception = null)
+    public void Log(LogLevel level, LogCategory category, string message, object? data = null, Exception? exception = null)
     {
         LogEntry entry = new LogEntry(
             Timestamp: DateTimeOffset.UtcNow,
@@ -29,23 +27,17 @@ public class ConsoleLogger : IConsoleLogger
         Write(entry);
     }
 
-    //public void Info(LogCategory category, string message, string data = null)
-    //    => Log(LogLevel.Info, category, message, data);
-
-    //public void Warn(LogCategory category, string message, string data = null)
-    //    => Log(LogLevel.Warn, category, message, data);
-
-    //public void Error(LogCategory category, string message, string data = null)
-    //    => Log(LogLevel.Error, category, message, data);
+    public void Debug(string message, object? data = null)
+        => Log(LogLevel.Debug, LogCategory.Message, message, data);
 
     public void Info(LogCategory category, string message, object? data = null)
-        => Log(LogLevel.Info, category, message, JsonSerializer.Serialize(data, AppConstracts.JsonOpts));
+        => Log(LogLevel.Info, category, message, data);
 
     public void Warn(LogCategory category, string message, object? data = null)
-        => Log(LogLevel.Warn, category, message, JsonSerializer.Serialize(data, AppConstracts.JsonOpts));
+        => Log(LogLevel.Warn, category, message, data);
 
     public void Error(LogCategory category, string message, object? data = null)
-        => Log(LogLevel.Error, category, message, JsonSerializer.Serialize(data, AppConstracts.JsonOpts));
+        => Log(LogLevel.Error, category, message, data);
 
     private void Write(LogEntry entry)
     {
@@ -58,15 +50,16 @@ public class ConsoleLogger : IConsoleLogger
 
             try
             {
-                if (_Options.IsUseColor && _Options.ForegroundLogLevelColors.TryGetValue(entry.Level, out ConsoleColor LevelColor))
-                {
-                    Console.BackgroundColor = LevelColor;
-                }
 
                 if (_Options.IsUseColor && _Options.ForegroundLogCategoryColors.TryGetValue(entry.Category, out ConsoleColor CategoryColor))
                 {
                     Console.ForegroundColor = CategoryColor;
                 }
+                if (_Options.IsUseColor && _Options.ForegroundLogLevelColors.TryGetValue(entry.Level, out ConsoleColor LevelColor))
+                {
+                    Console.ForegroundColor = LevelColor;
+                }
+
 
                 Console.WriteLine(text);
             }
@@ -129,5 +122,4 @@ public class ConsoleLogger : IConsoleLogger
 
         return sb.ToString();
     }
-
 }

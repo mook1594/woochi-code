@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using WoochiCode.Core;
+using WoochiCode.Core.Logger;
 using WoochiCode.Core.Utils;
 using WoochiCode.Core.Vo;
 
@@ -14,6 +15,9 @@ public class ConfigManager
         _Cwd = cwd;
     }
 
+    /// <summary>
+    /// 프로젝트 Config 로드
+    /// </summary>
     public AppConfig LoadConfig()
     {
         var configPath = PathUtils.GetProjectConfigFileAbsolutePath(_Cwd);
@@ -39,20 +43,25 @@ public class ConfigManager
         }
     }
 
+    /// <summary>
+    /// Config 기본 값 저장
+    /// </summary>
     public string SaveDefaultConfig()
     {
-        string path = PathUtils.GetProjectConfigFileAbsolutePath(_Cwd);
+        string dirPath = PathUtils.GetProjectConfigDirAbsolutePath(_Cwd);
+        ConsoleLogger.Instance.Info(LogCategory.Message, "default config 저장 경로", dirPath);
 
-        Directory.CreateDirectory(path);
+        Directory.CreateDirectory(dirPath);
 
         AppConfig config = new();
 
-        File.WriteAllText(path, JsonSerializer.Serialize(config, AppConstracts.JsonOpts));
+        string filePath = PathUtils.GetProjectConfigFileAbsolutePath(_Cwd);
+        File.WriteAllText(filePath, JsonSerializer.Serialize(config, AppConstracts.JsonOpts));
 
-        Directory.CreateDirectory(Path.Combine(path, AppConstracts.SkillsName));
-        Directory.CreateDirectory(Path.Combine(path, AppConstracts.HooksName));
+        Directory.CreateDirectory(Path.Combine(dirPath, AppConstracts.SkillsName));
+        Directory.CreateDirectory(Path.Combine(dirPath, AppConstracts.HooksName));
 
-        return path;
+        return dirPath;
     }
 
     private AppConfig BuildDefault(string cwd) => new()
